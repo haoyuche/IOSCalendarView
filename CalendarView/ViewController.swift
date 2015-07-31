@@ -18,13 +18,13 @@ class ViewController: UIViewController {
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
         case .Authorized:
-            print("Access already granted")
+            insertEvent(eventStore)
         case .Denied:
             print("Access already denied")
         case .NotDetermined:
             eventStore.requestAccessToEntityType(EKEntityType.Event, completion: { (granted:Bool, error:NSError?) -> Void in
                 if granted {
-                    print("Access granted!")
+                    self.insertEvent(eventStore)
                 } else {
                     print("Access denied")
                 }
@@ -39,6 +39,27 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func insertEvent(store: EKEventStore) {
+        let calendars = store.calendarsForEntityType(EKEntityType.Event) as [EKCalendar]
+        
+        for calendar in calendars {
+            if calendar.title == "Calendar" {
+                let startDate = NSDate()
+                let endDate = startDate.dateByAddingTimeInterval(2 * 60 * 60)
+                let event = EKEvent(eventStore: store)
+                event.calendar = calendar
+                event.title = "New Meeting"
+                event.startDate = startDate
+                event.endDate = endDate
+                
+                do {
+                    try store.saveEvent(event, span: EKSpan.ThisEvent)
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            }
+        }
+    }
 
 }
 

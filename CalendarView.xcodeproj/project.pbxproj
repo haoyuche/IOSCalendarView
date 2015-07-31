@@ -36,6 +36,7 @@
 		72B0F58B1B6BDB76007248AE /* CalendarViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B0F58F1B6BDB76007248AE /* CalendarViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewTests.swift; sourceTree = "<group>"; };
 		72B0F5911B6BDB76007248AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72B0F59F1B6BF5AE007248AE /* CalendarView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalendarView-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				72B0F5811B6BDB75007248AE /* Assets.xcassets */,
 				72B0F5831B6BDB75007248AE /* LaunchScreen.storyboard */,
 				72B0F5861B6BDB75007248AE /* Info.plist */,
+				72B0F59F1B6BF5AE007248AE /* CalendarView-Bridging-Header.h */,
 			);
 			path = CalendarView;
 			sourceTree = "<group>";
