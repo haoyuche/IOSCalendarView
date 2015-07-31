@@ -16,6 +16,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))) {
+            let notificationType:UIUserNotificationType = [.Alert, .Badge, .Sound]
+            let settings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
+            application.registerUserNotificationSettings(settings)
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        } else {
+            //do iOS 7 stuff, which is pretty much nothing for local notifications.
+        }
+        
+
+        
+//        let notificationType:UIUserNotificationType = [.Alert, .Badge, .Sound]
+//        let acceptAction = UIMutableUserNotificationAction()
+//        acceptAction.identifier = "Accept"
+//        acceptAction.title = "Accept"
+//        acceptAction.activationMode = UIUserNotificationActivationMode.Background
+//        acceptAction.destructive = false
+//        acceptAction.authenticationRequired = false
+//        
+//        let declineAction = UIMutableUserNotificationAction()
+//        declineAction.identifier = "Decline"
+//        declineAction.title = "Decline"
+//        declineAction.activationMode = UIUserNotificationActivationMode.Background
+//        declineAction.destructive = false
+//        declineAction.authenticationRequired = false
+//        
+//        
+//        let category = UIMutableUserNotificationCategory()
+//        category.identifier = "invite"
+//        category.setActions([acceptAction, declineAction], forContext: UIUserNotificationActionContext.Default)
+//        let categories = NSSet(array: [category])
+//        let settings = UIUserNotificationSettings(forTypes: notificationType, categories: categories as? Set<UIUserNotificationCategory>)
+//        application.registerUserNotificationSettings(settings)
+
         return true
     }
 

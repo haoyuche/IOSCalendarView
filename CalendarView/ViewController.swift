@@ -14,11 +14,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.pushNotification()
+        self.askForAccessToCalendar()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func askForAccessToCalendar() {
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
         case .Authorized:
-            insertEvent(eventStore)
+            //            insertEvent(eventStore)
+            print("Add an Event!")
         case .Denied:
             print("Access already denied")
         case .NotDetermined:
@@ -32,11 +42,6 @@ class ViewController: UIViewController {
         default:
             print("Case Default")
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func insertEvent(store: EKEventStore) {
@@ -59,6 +64,16 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func pushNotification() {
+        let localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = "Testing notifications on iOS9"
+        localNotification.alertBody = "Local notifications are working"
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.category = "invite"
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 
 }
