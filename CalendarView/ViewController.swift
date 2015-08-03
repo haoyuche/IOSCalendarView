@@ -27,7 +27,8 @@ class ViewController: UIViewController {
         let eventStore = EKEventStore()
         switch EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) {
         case .Authorized:
-            //            insertEvent(eventStore)
+            insertEvent(eventStore)
+            loadCalendar(eventStore)
             print("Add an Event!")
         case .Denied:
             print("Access already denied")
@@ -62,6 +63,23 @@ class ViewController: UIViewController {
                 } catch let error as NSError {
                     print(error.description)
                 }
+            }
+        }
+    }
+    
+    // Load all events from Calendar
+    func loadCalendar(store: EKEventStore) {
+        let startDate=NSDate().dateByAddingTimeInterval(-60*60*24)
+        let endDate=NSDate().dateByAddingTimeInterval(60*60*24*3)
+        let predicate = store.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: nil)
+        
+        let eV = store.eventsMatchingPredicate(predicate) as [EKEvent]!
+        
+        if eV != nil {
+            for i in eV {
+                print("Title  \(i.title)" )
+                print("stareDate: \(i.startDate)" )
+                print("endDate: \(i.endDate)" )
             }
         }
     }
